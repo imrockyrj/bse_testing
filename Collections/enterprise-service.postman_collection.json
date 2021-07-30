@@ -1,0 +1,2128 @@
+{
+	"info": {
+		"_postman_id": "b7e484f8-b061-44f3-bc44-018bb850ffa9",
+		"name": "enterprise-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Valid-Request",
+					"item": [
+						{
+							"name": "Accounts_WhenValidRequestWithAUUID_Response200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Verify auuid\", function () {",
+											"    var accounts = pm.response.json().response.accounts;",
+											"    console.log(accounts.length);",
+											"    for(var i = 0; i < accounts.length ; i++ ){ ",
+											"        var actual = pm.response.json().response.accounts[i].kam.auuid;",
+											"        var expected = pm.environment.get(\"auuid\")",
+											"        pm.expect(actual).to.eql(expected);",
+											"    }",
+											"});",
+											"",
+											"var schema = {",
+											"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"status\": {",
+											"      \"type\": \"string\"",
+											"    },",
+											"    \"message\": {",
+											"      \"type\": \"string\"",
+											"    },",
+											"    \"response\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"limit\": {",
+											"          \"type\": \"integer\"",
+											"        },",
+											"        \"offset\": {",
+											"          \"type\": \"integer\"",
+											"        },",
+											"        ",
+											"        \"accounts\": {",
+											"          \"type\": \"array\",",
+											"          \"items\": [",
+											"            {",
+											"              \"type\": \"object\",",
+											"              \"properties\": {",
+											"                \"accountNo\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"accountName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"accountType\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"billingAcountId\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"parentAccountNo\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"parentAccountName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"personId\": {",
+											"                  \"type\": \"integer\"",
+											"                },",
+											"                \"invoicedAccount\": {",
+											"                  \"type\": \"boolean\"",
+											"                },",
+											"                \"contactPersonfirstName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonlastName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonEmailId\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonMsisdn\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"kam\": {",
+											"                  \"type\": \"object\",",
+											"                  \"properties\": {",
+											"                    \"name\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"auuid\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"emailID\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"phoneNumber\": {",
+											"                      \"type\": \"string\"",
+											"                    }",
+											"                  },",
+											"                  \"required\": [",
+											"                    \"name\",",
+											"                    \"auuid\",",
+											"                    \"emailID\",",
+											"                    \"phoneNumber\"",
+											"                  ]",
+											"                },",
+											"                \"customerAddress\": {",
+											"                  \"type\": \"object\",",
+											"                  \"properties\": {",
+											"                    \"addressLine1\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"addressLine2\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"suburb\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"city\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"state\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"country\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"postalCode\": {",
+											"                      \"type\": \"string\"",
+											"                    }",
+											"                  },",
+											"                  \"required\": [",
+											"                    \"addressLine1\",",
+											"                    \"addressLine2\",",
+											"                    \"suburb\",",
+											"                    \"city\",",
+											"                    \"state\",",
+											"                    \"country\",",
+											"                    \"postalCode\"",
+											"                  ]",
+											"                },",
+											"                \"segment\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"subSegment\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"customerCategory\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"activationDate\": {",
+											"                  \"type\": \"integer\"",
+											"                },",
+											"                \"modifiedDate\": {",
+											"                  \"type\": \"integer\"",
+											"                }",
+											"              },",
+											"              \"required\": [",
+											"                \"accountNo\",",
+											"                \"accountName\",",
+											"                \"accountType\",",
+											"                \"billingAcountId\",",
+											"                \"parentAccountNo\",",
+											"                \"parentAccountName\",",
+											"                \"personId\",",
+											"                \"invoicedAccount\",",
+											"                \"contactPersonfirstName\",",
+											"                \"contactPersonlastName\",",
+											"                \"contactPersonEmailId\",",
+											"                \"contactPersonMsisdn\",",
+											"                \"kam\",",
+											"                \"customerAddress\",",
+											"                \"segment\",",
+											"                \"subSegment\",",
+											"                \"customerCategory\",",
+											"                \"activationDate\",",
+											"                \"modifiedDate\"",
+											"              ]",
+											"            }",
+											"          ]",
+											"        }",
+											"      },",
+											"      \"required\": [",
+											"        // \"limit\",",
+											"        // \"offset\",",
+											"        \"accounts\"",
+											"      ]",
+											"    }",
+											"  },",
+											"  \"required\": [",
+											"    \"status\",",
+											"    \"message\",",
+											"    \"response\"",
+											"  ]",
+											"};",
+											"",
+											"pm.test('Schema is valid', function () {",
+											"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"auuid\",\"2390021\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*",
+										"type": "text"
+									},
+									{
+										"key": "ASP-API-Key",
+										"value": "{{ASP-API-Key}}",
+										"type": "text"
+									},
+									{
+										"key": "ASP-Consumer-Id",
+										"value": "{{ASP-Consumer-Id}}",
+										"type": "text"
+									},
+									{
+										"key": "ASP-Consumer-Txn-Id",
+										"value": "{{ASP-Consumer-Txn-Id}}",
+										"type": "text"
+									},
+									{
+										"key": "ASP-Locale",
+										"value": "en-US",
+										"type": "text"
+									},
+									{
+										"key": "ASP-OPCO",
+										"value": "{{ASP-OPCO}}",
+										"type": "text"
+									},
+									{
+										"key": "ASP-Req-Timestamp",
+										"value": "{{ASP-Req-Timestamp}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"auuid\": \"{{auuid}}\"\n}"
+								},
+								"url": {
+									"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+									"host": [
+										"{{Host}}{{EnterPrise}}"
+									],
+									"path": [
+										"api",
+										"enterprise-service",
+										"v1",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accounts_WhenValidRequestWithAUUID2_Response200",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Verify auuid\", function () {",
+											"    var accounts = pm.response.json().response.accounts;",
+											"    console.log(accounts.length);",
+											"    for(var i = 0; i < accounts.length ; i++ ){ ",
+											"        var actual = pm.response.json().response.accounts[i].kam.auuid;",
+											"        var expected = pm.environment.get(\"auuid\")",
+											"        pm.expect(actual).to.eql(expected);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Verify accountNo\", function () {",
+											"    var accounts = pm.response.json().response.accounts;",
+											"    console.log(accounts.length);",
+											"    for(var i = 0; i < accounts.length ; i++ ){ ",
+											"        var actual = pm.response.json().response.accounts[i].accountNo;",
+											"        var expected = pm.environment.get(\"accountNo\")",
+											"        pm.expect(actual).to.eql(expected);",
+											"    }",
+											"});",
+											"",
+											"var schema = {",
+											"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+											"  \"type\": \"object\",",
+											"  \"properties\": {",
+											"    \"status\": {",
+											"      \"type\": \"string\"",
+											"    },",
+											"    \"message\": {",
+											"      \"type\": \"string\"",
+											"    },",
+											"    \"response\": {",
+											"      \"type\": \"object\",",
+											"      \"properties\": {",
+											"        \"limit\": {",
+											"          \"type\": \"integer\"",
+											"        },",
+											"        \"offset\": {",
+											"          \"type\": \"integer\"",
+											"        },",
+											"        ",
+											"        \"accounts\": {",
+											"          \"type\": \"array\",",
+											"          \"items\": [",
+											"            {",
+											"              \"type\": \"object\",",
+											"              \"properties\": {",
+											"                \"accountNo\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"accountName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"accountType\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"billingAcountId\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"parentAccountNo\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"parentAccountName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"personId\": {",
+											"                  \"type\": \"integer\"",
+											"                },",
+											"                \"invoicedAccount\": {",
+											"                  \"type\": \"boolean\"",
+											"                },",
+											"                \"contactPersonfirstName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonlastName\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonEmailId\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"contactPersonMsisdn\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"kam\": {",
+											"                  \"type\": \"object\",",
+											"                  \"properties\": {",
+											"                    \"name\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"auuid\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"emailID\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"phoneNumber\": {",
+											"                      \"type\": \"string\"",
+											"                    }",
+											"                  },",
+											"                  \"required\": [",
+											"                    \"name\",",
+											"                    \"auuid\",",
+											"                    \"emailID\",",
+											"                    \"phoneNumber\"",
+											"                  ]",
+											"                },",
+											"                \"customerAddress\": {",
+											"                  \"type\": \"object\",",
+											"                  \"properties\": {",
+											"                    \"addressLine1\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"addressLine2\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"suburb\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"city\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"state\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"country\": {",
+											"                      \"type\": \"string\"",
+											"                    },",
+											"                    \"postalCode\": {",
+											"                      \"type\": \"string\"",
+											"                    }",
+											"                  },",
+											"                  \"required\": [",
+											"                    \"addressLine1\",",
+											"                    \"addressLine2\",",
+											"                    \"suburb\",",
+											"                    \"city\",",
+											"                    \"state\",",
+											"                    \"country\",",
+											"                    \"postalCode\"",
+											"                  ]",
+											"                },",
+											"                \"segment\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"subSegment\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"customerCategory\": {",
+											"                  \"type\": \"string\"",
+											"                },",
+											"                \"activationDate\": {",
+											"                  \"type\": \"integer\"",
+											"                },",
+											"                \"modifiedDate\": {",
+											"                  \"type\": \"integer\"",
+											"                }",
+											"              },",
+											"              \"required\": [",
+											"                \"accountNo\",",
+											"                \"accountName\",",
+											"                \"accountType\",",
+											"                \"billingAcountId\",",
+											"                \"parentAccountNo\",",
+											"                \"parentAccountName\",",
+											"                \"personId\",",
+											"                \"invoicedAccount\",",
+											"                \"contactPersonfirstName\",",
+											"                \"contactPersonlastName\",",
+											"                \"contactPersonEmailId\",",
+											"                \"contactPersonMsisdn\",",
+											"                \"kam\",",
+											"                \"customerAddress\",",
+											"                \"segment\",",
+											"                \"subSegment\",",
+											"                \"customerCategory\",",
+											"                \"activationDate\",",
+											"                \"modifiedDate\"",
+											"              ]",
+											"            }",
+											"          ]",
+											"        }",
+											"      },",
+											"      \"required\": [",
+											"        // \"limit\",",
+											"        // \"offset\",",
+											"        \"accounts\"",
+											"      ]",
+											"    }",
+											"  },",
+											"  \"required\": [",
+											"    \"status\",",
+											"    \"message\",",
+											"    \"response\"",
+											"  ]",
+											"};",
+											"",
+											"pm.test('Schema is valid', function () {",
+											"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"auuid\",\"2390021\");",
+											"pm.environment.set(\"accountNo\",\"0000000216\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "ASP-API-Key",
+										"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+									},
+									{
+										"key": "ASP-Consumer-Id",
+										"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+									},
+									{
+										"key": "ASP-Consumer-Txn-Id",
+										"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+									},
+									{
+										"key": "ASP-Locale",
+										"value": "en-US"
+									},
+									{
+										"key": "ASP-OPCO",
+										"value": "UG"
+									},
+									{
+										"key": "ASP-Req-Timestamp",
+										"value": "1545133168"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"auuid\": \"{{auuid}}\",\n    \"accountNo\": \"{{accountNo}}\"\n}"
+								},
+								"url": {
+									"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+									"host": [
+										"{{Host}}{{EnterPrise}}"
+									],
+									"path": [
+										"api",
+										"enterprise-service",
+										"v1",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Others",
+					"item": [
+						{
+							"name": "Validate AUUID",
+							"item": [
+								{
+									"name": "Accounts_WhenInvalidAUUID_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    pm.expect(\"No record found\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.environment.set(\"contactPersonEmailId\",\"sahil1.pratap@africa.airtel.com\");",
+													"pm.environment.set(\"contactPersonMsisdn\",\"999999914\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"auuid\": \"UAT_BOTL88\",\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"limit\": 1,\n    \"offset\": 0\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Accounts_WhenAUUIDNotPassed_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"72D2406\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"Either KAM or Contact email Id and phone number are mandatory in input.\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Accounts_WhenAUUIDIsNull_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"72D2406\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"Either KAM or Contact email Id and phone number are mandatory in input.\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"auuid\": null,\n    \n    \"limit\": 1,\n    \"offset\": 0\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Accounts_WhenAUUIDIsEmpty_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"72D2406\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"Either KAM or Contact email Id and phone number are mandatory in input.\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"auuid\": \"\",\n    \n    \"limit\": 1,\n    \"offset\": 0\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Accounts_WhenSpaceInAUUID_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"72D2406\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"Either KAM or Contact email Id and phone number are mandatory in input.\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"auuid\": \"        \",\n    \n    \"limit\": 1,\n    \"offset\": 0\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Accounts_WhenSpaceInAUUID_Response200",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Verify auuid\", function () {",
+													"    var accounts = pm.response.json().response.accounts;",
+													"    console.log(accounts.length);",
+													"    for(var i = 0; i < accounts.length ; i++ ){ ",
+													"        var actual = pm.response.json().response.accounts[i].kam.auuid;",
+													"        var expected = pm.environment.get(\"auuid\")",
+													"        pm.expect(actual).to.eql(expected);",
+													"    }",
+													"});",
+													"",
+													"var schema = {",
+													"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+													"  \"type\": \"object\",",
+													"  \"properties\": {",
+													"    \"status\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"message\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"response\": {",
+													"      \"type\": \"object\",",
+													"      \"properties\": {",
+													"        \"limit\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"offset\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        ",
+													"        \"accounts\": {",
+													"          \"type\": \"array\",",
+													"          \"items\": [",
+													"            {",
+													"              \"type\": \"object\",",
+													"              \"properties\": {",
+													"                \"accountNo\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"accountName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"accountType\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"billingAcountId\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"parentAccountNo\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"parentAccountName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"personId\": {",
+													"                  \"type\": \"integer\"",
+													"                },",
+													"                \"invoicedAccount\": {",
+													"                  \"type\": \"boolean\"",
+													"                },",
+													"                \"contactPersonfirstName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"contactPersonlastName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"contactPersonEmailId\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"contactPersonMsisdn\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"kam\": {",
+													"                  \"type\": \"object\",",
+													"                  \"properties\": {",
+													"                    \"name\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"auuid\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"emailID\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"phoneNumber\": {",
+													"                      \"type\": \"string\"",
+													"                    }",
+													"                  },",
+													"                  \"required\": [",
+													"                    \"name\",",
+													"                    \"auuid\",",
+													"                    \"emailID\",",
+													"                    \"phoneNumber\"",
+													"                  ]",
+													"                },",
+													"                \"customerAddress\": {",
+													"                  \"type\": \"object\",",
+													"                  \"properties\": {",
+													"                    \"addressLine1\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"addressLine2\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"suburb\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"city\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"state\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"country\": {",
+													"                      \"type\": \"string\"",
+													"                    },",
+													"                    \"postalCode\": {",
+													"                      \"type\": \"string\"",
+													"                    }",
+													"                  },",
+													"                  \"required\": [",
+													"                    \"addressLine1\",",
+													"                    \"addressLine2\",",
+													"                    \"suburb\",",
+													"                    \"city\",",
+													"                    \"state\",",
+													"                    \"country\",",
+													"                    \"postalCode\"",
+													"                  ]",
+													"                },",
+													"                \"segment\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"subSegment\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"customerCategory\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"activationDate\": {",
+													"                  \"type\": \"integer\"",
+													"                },",
+													"                \"modifiedDate\": {",
+													"                  \"type\": \"integer\"",
+													"                }",
+													"              },",
+													"              \"required\": [",
+													"                \"accountNo\",",
+													"                \"accountName\",",
+													"                \"accountType\",",
+													"                \"billingAcountId\",",
+													"                \"parentAccountNo\",",
+													"                \"parentAccountName\",",
+													"                \"personId\",",
+													"                \"invoicedAccount\",",
+													"                \"contactPersonfirstName\",",
+													"                \"contactPersonlastName\",",
+													"                \"contactPersonEmailId\",",
+													"                \"contactPersonMsisdn\",",
+													"                \"kam\",",
+													"                \"customerAddress\",",
+													"                \"segment\",",
+													"                \"subSegment\",",
+													"                \"customerCategory\",",
+													"                \"activationDate\",",
+													"                \"modifiedDate\"",
+													"              ]",
+													"            }",
+													"          ]",
+													"        }",
+													"      },",
+													"      \"required\": [",
+													"        \"limit\",",
+													"        \"offset\",",
+													"        \"accounts\"",
+													"      ]",
+													"    }",
+													"  },",
+													"  \"required\": [",
+													"    \"status\",",
+													"    \"message\",",
+													"    \"response\"",
+													"  ]",
+													"};",
+													"",
+													"pm.test('Schema is valid', function () {",
+													"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "application/json"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"auuid\": \"    {{auuid}}    \",\n    \n    \"limit\": {{limit}},\n    \"offset\": 0\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lines",
+			"item": [
+				{
+					"name": "Valid-Request",
+					"item": [
+						{
+							"name": "For account Number",
+							"item": [
+								{
+									"name": "Lines_WhenValidRequestWithAccount_Response200",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Verify accountNo\", function () {",
+													"    var accounts = pm.response.json().response.lines;",
+													"    console.log(accounts.length);",
+													"    for(var i = 0; i < accounts.length ; i++ ){ ",
+													"        var actual = pm.response.json().response.lines[i].accountNo;",
+													"        var expected = pm.environment.get(\"accountNo\")",
+													"        pm.expect(actual).to.eql(expected);",
+													"    }",
+													"});",
+													"",
+													"var schema = {",
+													"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+													"  \"type\": \"object\",",
+													"  \"properties\": {",
+													"    \"status\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"message\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"response\": {",
+													"      \"type\": \"object\",",
+													"      \"properties\": {",
+													"        \"limit\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"offset\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"totalRecords\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"lines\": {",
+													"          \"type\": \"array\",",
+													"          \"items\": [",
+													"            {",
+													"              \"type\": \"object\",",
+													"              \"properties\": {",
+													"                \"simSerialNumber\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"msisdn\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"accountNo\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"subscriberName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"activationDate\": {",
+													"                  \"type\": \"integer\"",
+													"                },",
+													"                \"lineNumber\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"lineType\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"paymentLevel\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"serviceType\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"status\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"currentUsagelimit\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"basePlan\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"addOnPlans\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"cug\": {",
+													"                  \"type\": \"boolean\"",
+													"                },",
+													"                \"dnd\": {",
+													"                  \"type\": \"boolean\"",
+													"                },",
+													"                \"vip\": {",
+													"                  \"type\": \"boolean\"",
+													"                }",
+													"              }",
+													"            }",
+													"          ]",
+													"        }",
+													"      }",
+													"    }",
+													"  },",
+													"  \"required\": [",
+													"    \"status\",",
+													"    \"message\",",
+													"    \"response\"",
+													"  ]",
+													"};",
+													"",
+													"pm.test('Schema is valid', function () {",
+													"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// pm.environment.set(\"accountNo\",\"0114413354\")",
+													"",
+													"//pm.environment.set(\"accountNo\",\"0000000612\")",
+													"",
+													"pm.environment.set(\"accountNo\",\"0114412760\")"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*",
+												"type": "text"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "{{ASP-API-Key}}",
+												"type": "text"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "{{ASP-Consumer-Id}}",
+												"type": "text"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "{{ASP-Consumer-Txn-Id}}",
+												"type": "text"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US",
+												"type": "text"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "{{ASP-OPCO}}",
+												"type": "text"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "{{ASP-Req-Timestamp}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": \"{{accountNo}}\"\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "For Acc and Msisdn",
+							"item": [
+								{
+									"name": "Lines_WhenValidRequestWithAccount_Response200",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Verify accountNo\", function () {",
+													"    var accounts = pm.response.json().response.lines;",
+													"    console.log(accounts.length);",
+													"    for(var i = 0; i < accounts.length ; i++ ){ ",
+													"        var actual = pm.response.json().response.lines[i].accountNo;",
+													"        var expected = pm.environment.get(\"accountNo\")",
+													"        pm.expect(actual).to.eql(expected);",
+													"    }",
+													"});",
+													"",
+													"pm.test(\"Verify msisdn\", function () {",
+													"    var accounts = pm.response.json().response.lines;",
+													"    console.log(accounts.length);",
+													"    for(var i = 0; i < accounts.length ; i++ ){ ",
+													"        var actual = pm.response.json().response.lines[i].msisdn;",
+													"        var expected = pm.environment.get(\"msisdn\")",
+													"        pm.expect(actual).to.eql(expected);",
+													"    }",
+													"});",
+													"",
+													"var schema = {",
+													"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+													"  \"type\": \"object\",",
+													"  \"properties\": {",
+													"    \"status\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"message\": {",
+													"      \"type\": \"string\"",
+													"    },",
+													"    \"response\": {",
+													"      \"type\": \"object\",",
+													"      \"properties\": {",
+													"        \"limit\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"offset\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"totalRecords\": {",
+													"          \"type\": \"integer\"",
+													"        },",
+													"        \"lines\": {",
+													"          \"type\": \"array\",",
+													"          \"items\": [",
+													"            {",
+													"              \"type\": \"object\",",
+													"              \"properties\": {",
+													"                \"simSerialNumber\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"msisdn\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"accountNo\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"subscriberName\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"activationDate\": {",
+													"                  \"type\": \"integer\"",
+													"                },",
+													"                \"lineNumber\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"lineType\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"paymentLevel\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"serviceType\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"status\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"currentUsagelimit\": {",
+													"                  \"type\": \"string\"",
+													"                },",
+													"                \"basePlan\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"addOnPlans\": {",
+													"                  \"type\": [\"string\",\"null\"]",
+													"                },",
+													"                \"cug\": {",
+													"                  \"type\": \"boolean\"",
+													"                },",
+													"                \"dnd\": {",
+													"                  \"type\": \"boolean\"",
+													"                },",
+													"                \"vip\": {",
+													"                  \"type\": \"boolean\"",
+													"                }",
+													"              }",
+													"            }",
+													"          ]",
+													"        }",
+													"      }",
+													"    }",
+													"  },",
+													"  \"required\": [",
+													"    \"status\",",
+													"    \"message\",",
+													"    \"response\"",
+													"  ]",
+													"};",
+													"",
+													"pm.test('Schema is valid', function () {",
+													"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// pm.environment.set(\"msisdn\",\"699780723\")",
+													"// pm.environment.set(\"accountNo\",\"0114413354\")",
+													"",
+													"pm.environment.set(\"msisdn\",\"699780726\")",
+													"pm.environment.set(\"accountNo\",\"0114412760\")",
+													"",
+													"",
+													"",
+													"// pm.environment.set(\"msisdn\",\"699121733\")",
+													"// pm.environment.set(\"accountNo\",\"0000000612\")",
+													"",
+													"// pm.environment.set(\"accountNo\",\"0114413354\");",
+													"// pm.environment.set(\"msisdn\",\"699121733\");//699780727"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "9e8bfb75-40d2-4652-a661-44615abacfed"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "TZ_ESB_SERVICE"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "TZ"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": \"{{accountNo}}\",\n    \"msisdn\":\"{{msisdn}}\",\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\"\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Others",
+					"item": [
+						{
+							"name": "Validate Account Id",
+							"item": [
+								{
+									"name": "Lines_WhenInvalidAccountPassed_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    pm.expect(\"unauthorized request\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.environment.set(\"contactPersonEmailId\",\"aman1.choudhary@africa.airtel.com\");",
+													"pm.environment.set(\"contactPersonMsisdn\",\"999999912\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": \"acb0000026229\",\n    \"serviceTypes\": [\n        \n    ],\n    \"limit\": {{limit}},\n    \"offset\": 0,\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"showVIP\": true\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Lines_WhenAccountIsNull_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"400\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"account number is required\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": null,\n    \"serviceTypes\": [\n        \"MOBILE\"\n    ],\n    \"limit\": {{limit}},\n    \"offset\": 0,\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"showVIP\": true\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Lines_WhenAccountIsEmpty_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"400\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"account number is required\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": \"\",\n    \"serviceTypes\": [\n        \"MOBILE\"\n    ],\n    \"limit\": {{limit}},\n    \"offset\": 0,\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"showVIP\": true\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Lines_WhenSpaceInAccount_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"400\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"account number is required\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"accountNo\": \"      \",\n    \"serviceTypes\": [\n        \n    ],\n    \"limit\": {{limit}},\n    \"offset\": 0,\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"showVIP\": false\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Lines_WhenAccountIsNotPassed_Response400",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													"pm.test(\"Verify Status\", function () {",
+													"    var actual = pm.response.json().status;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"400\").to.eql(actual);",
+													"});",
+													"",
+													"pm.test(\"Verify Message\", function () {",
+													"    var actual = pm.response.json().message;",
+													"    //var actual = pm.environment.get(\"limit\");",
+													"    pm.expect(\"account number is required\").to.eql(actual);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "accept",
+												"value": "*/*"
+											},
+											{
+												"key": "ASP-API-Key",
+												"value": "84cbd62d-81b8-47b4-a281-349ca8796105"
+											},
+											{
+												"key": "ASP-Consumer-Id",
+												"value": "045464d0-507f-430e-8628-2db468f7c9d7"
+											},
+											{
+												"key": "ASP-Consumer-Txn-Id",
+												"value": "971cb397-c337-4fa5-a90b-4dfc3afddfb3"
+											},
+											{
+												"key": "ASP-Locale",
+												"value": "en-US"
+											},
+											{
+												"key": "ASP-OPCO",
+												"value": "UG"
+											},
+											{
+												"key": "ASP-Req-Timestamp",
+												"value": "1545133168"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \n    \"serviceTypes\": [\n        \"MOBILE\"\n    ],\n    \"limit\": {{limit}},\n    \"offset\": 0,\n    \"contactPersonEmailId\": \"{{contactPersonEmailId}}\",\n    \"contactPersonMsisdn\": \"{{contactPersonMsisdn}}\",\n    \"showVIP\": true\n}"
+										},
+										"url": {
+											"raw": "{{Host}}{{EnterPrise}}/api/enterprise-service/v1/accounts/lines",
+											"host": [
+												"{{Host}}{{EnterPrise}}"
+											],
+											"path": [
+												"api",
+												"enterprise-service",
+												"v1",
+												"accounts",
+												"lines"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
